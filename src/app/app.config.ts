@@ -11,6 +11,12 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),provideHttpClient(),
-    provideRouter(routes), provideFirebaseApp(() => initializeApp({ projectId: "adding-poduct", appId: "1:890097519125:web:bf2033dd7eed170990dc1c", storageBucket: "adding-poduct.appspot.com", apiKey: "AIzaSyBqu2-QY50umbVYch2VGyh9w2DM18dDVDE", authDomain: "adding-poduct.firebaseapp.com", messagingSenderId: "890097519125", measurementId: "G-G0H6FETCE8" })), provideAuth(() => getAuth()), provideFirestore(() => getFirestore())
+    provideRouter(routes), provideFirebaseApp(() => initializeApp({ apiKey: "AIzaSyD9QIF0g6s07k26lTqf3VDAKyTPAaUZC9I",
+  authDomain: "quran-e321e.firebaseapp.com",
+  projectId: "quran-e321e",
+  storageBucket: "quran-e321e.firebasestorage.app",
+  messagingSenderId: "823855900292",
+  appId: "1:823855900292:web:77d2d5e11a1b6ed1af44d1",
+  measurementId: "G-71P3SECYFV"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore())
   ]
 };

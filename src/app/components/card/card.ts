@@ -17,23 +17,17 @@ export class Card implements OnDestroy, OnInit {
     this.getAyahForReading();
   }
 
+loading=signal<boolean>(false)
 
   private subs = new Subscription();
   //injection auth service
   auth = inject(Authenication);
-
   //injection card service
   _card = inject(Crad)
-
   //injection plnve service
   _plane = inject(Plane)
-
   //injection rout service
   rout = inject(Router)
-
-
-
-
   ayah = signal<any>({});
 
 
@@ -51,6 +45,7 @@ export class Card implements OnDestroy, OnInit {
   }
 
   routTo() {
+    this.loading.set(true)
     this.subs.add(this._plane.isUserHasPlane().subscribe((res: any) => {
       if (res.plane) {
         this.rout.navigate(['/home']);

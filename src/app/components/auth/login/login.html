@@ -1,106 +1,118 @@
-<div class="min-h-screen bg-slate-50 flex items-center justify-center p-4 sm:p-8  relative overflow-hidden">
+<div class="min-h-screen bg-[#FAF9F5] flex items-center justify-center p-4 sm:p-8 lg:p-12 relative overflow-hidden font-sans select-none" dir="rtl">
   
-  <div class="absolute top-0 left-0 w-64 h-64 bg-emerald-100 rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"></div>
-  <div class="absolute bottom-0 right-0 w-96 h-96 bg-amber-100 rounded-full blur-3xl opacity-40 translate-x-1/3 translate-y-1/3"></div>
+  <div class="absolute -top-[10%] -right-[10%] w-[45%] h-[45%] bg-emerald-50 rounded-full blur-[120px] opacity-80 pointer-events-none"></div>
+  <div class="absolute -bottom-[10%] -left-[10%] w-[45%] h-[45%] bg-amber-50 rounded-full blur-[120px] opacity-60 pointer-events-none"></div>
 
-  <section class="relative w-full max-w-5xl bg-white/80 backdrop-blur-md flex flex-col md:flex-row overflow-hidden rounded-3xl shadow-2xl border border-emerald-100 animate-in fade-in duration-1000">
+  <section class="relative w-full max-w-5xl bg-white flex flex-col md:flex-row-reverse shadow-2xl shadow-emerald-950/5 rounded-3xl overflow-hidden border border-emerald-100/40">
     
-    <div class="hidden md:flex md:w-1/2 bg-emerald-900 relative items-center justify-center p-12 overflow-hidden">
-      <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/islamic-art.png')]"></div>
+    <div class="hidden md:flex md:w-1/2 bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-950 relative items-center justify-center p-12 text-center overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/islamic-art.png')] pointer-events-none"></div>
       
-      <div class="relative z-10 text-center transform transition-all duration-700 hover:scale-105">
+      <div class="absolute w-64 h-64 rounded-full bg-amber-400/5 blur-[50px] animate-pulse pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-6 max-w-sm transform transition-all duration-700 hover:scale-[1.01]">
         <div class="relative inline-block">
-            <img src="/17552.jpg" alt="Quran" class="w-64 h-64 object-cover rounded-full border-4 border-amber-400 shadow-2xl mb-8 mx-auto" />
-            <div class="absolute inset-0 rounded-full ring-8 ring-amber-400/20 animate-pulse"></div>
+          <div class="absolute inset-0 rounded-full ring-8 ring-amber-400/10 animate-ping duration-[4000ms]"></div>
+          <img src="/17552.jpg" alt="Quran App" 
+               class="relative w-36 h-36 rounded-full border-2 border-amber-400/60 shadow-2xl object-cover" />
         </div>
-        
-        <h3 class="font-['Amiri'] text-3xl text-amber-200 leading-loose mb-4">
-          وَإِنَّهُ لَقُرْآنٌ كَرِيمٌ
-        </h3>
-        <p class="text-emerald-100/80 text-lg font-light tracking-wide italic">
-          فِي كِتَابٍ مَّكْنُونٍ
-        </p>
+
+        <div class="space-y-3">
+          <h3 class="text-amber-300 text-3xl font-['Amiri',_serif] leading-loose drop-shadow-sm">
+            وَإِنَّهُ لَقُرْآنٌ كَرِيمٌ
+          </h3>
+          <p class="text-emerald-100/70 text-lg font-['Amiri',_serif] italic">
+            فِي كِتَابٍ مَّكْنُونٍ
+          </p>
+          <div class="h-px w-12 bg-amber-400/30 mx-auto my-4"></div>
+          <p class="text-emerald-200/50 text-xs tracking-wider uppercase font-medium">مرحباً بك في منصة تيجان الرقمية</p>
+        </div>
       </div>
     </div>
 
-    <div class="w-full md:w-1/2 p-8 md:p-14 flex flex-col justify-center">
+    <div class="w-full md:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
       
-      <div class="mb-10 text-center md:text-right">
-        <span class="text-emerald-600 font-medium tracking-widest uppercase text-xs">أهلاً بك مجدداً</span>
-        <h2 class="text-4xl font-bold text-slate-800 mt-2">تسجيل <span class="text-emerald-700">الدخول</span></h2>
-        <div class="h-1 w-12 bg-amber-400 mt-4 mx-auto md:mr-0 md:ml-auto rounded-full"></div>
+      <div class="mb-8 text-right">
+        <span class="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full inline-block mb-3">
+          مرحباً بك مجدداً
+        </span>
+        <h2 class="text-3xl font-black text-slate-800 tracking-tight">
+          تسجيل <span class="text-emerald-700 relative">الدخول<span class="absolute bottom-1 left-0 w-full h-1 bg-emerald-100/70 -z-10 rounded"></span></span>
+        </h2>
+        <p class="text-slate-400 text-sm mt-2">تابع وردك اليومي ومسيرة حفظك لكتاب الله</p>
       </div>
 
-      <form class="space-y-6" #form="ngForm" (submit)="login($event)">
+      <form #form="ngForm" (submit)="login($event)" class="space-y-5">
         
-        <div class="group">
-          <label class="block text-slate-700 font-semibold mb-2 pr-1 transition-colors group-focus-within:text-emerald-600">
-            البريد الإلكتروني
-          </label>
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-slate-600 tracking-wide pr-1">البريد الإلكتروني</label>
           <div class="relative">
-            <input 
-              [(ngModel)]="user().email" 
-              #email="ngModel" 
-              type="email" 
-              name="email" 
-              required 
-              email
-              minlength="10"
-              placeholder="example@mail.com"
-              class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300"
-            />
+            <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            </span>
+            <input [(ngModel)]="user().email" #email="ngModel" name="email" required email minlength="10" type="email"
+                   class="w-full pr-11 pl-4 py-3.5 bg-slate-50/60 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 focus:bg-white outline-none transition-all duration-300 text-slate-800 placeholder-slate-300 text-sm ltr-input"
+                   placeholder="example@mail.com" />
           </div>
           
-          <div class="overflow-hidden transition-all duration-300" [class.h-0]="!(email.invalid && email.touched)">
-            <div class="text-red-500 text-sm mt-2 flex items-center gap-1">
-              <span *ngIf="email.hasError('required')">● البريد الالكتروني مطلوب</span>
-              <span *ngIf="email.hasError('email')">● البريد الالكتروني غير صالح</span>
-            </div>
+          <div class="text-red-500 text-xs mt-1 space-y-1 transition-all duration-300">
+            @if(email.hasError('required') && email.touched){ 
+              <p class="flex items-center gap-1.5 animate-fadeIn"><span>●</span> البريد الإلكتروني مطلوب للمتابعة</p> 
+            }
+            @if((email.hasError('email') || email.hasError('minlength')) && email.touched){ 
+              <p class="flex items-center gap-1.5 animate-fadeIn"><span>●</span> صيغة البريد الإلكتروني المدخلة غير صالحة</p> 
+            }
           </div>
         </div>
 
-        <div class="group">
-          <div class="flex justify-between items-center mb-2 pr-1">
-            <label class="text-slate-700 font-semibold transition-colors group-focus-within:text-emerald-600">
-              كلمة السر
-            </label>
-            <a href="#" class="text-xs text-emerald-600 hover:text-emerald-700 hover:underline transition-all">نسيت كلمة السر؟</a>
+        <div class="space-y-1.5">
+          <div class="flex justify-between items-center mb-1 pr-1">
+            <label class="text-xs font-bold text-slate-600 tracking-wide">كلمة السر</label>
+            <a routerLink="/forgot-password" class="text-xs text-emerald-600 hover:text-emerald-700 font-medium hover:underline transition-colors">
+              نسيت كلمة السر؟
+            </a>
           </div>
-          <input 
-            [(ngModel)]="user().password" 
-            #password="ngModel" 
-            name="password" 
-            placeholder="************"
-            type="password" 
-            required 
-            minlength="6" 
-            maxlength="100" 
-            pattern="^(?=.*[A-Z])(?=.*\d).+$"
-            class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all duration-300"
-          />
+          <div class="relative">
+            <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+            </span>
+            <input [(ngModel)]="user().password" name="password" #password="ngModel"
+                   type="password" required minlength="6" maxlength="100" pattern="^(?=.*[A-Z])(?=.*\d).+$"
+                   class="w-full pr-11 pl-4 py-3.5 bg-slate-50/60 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 focus:bg-white outline-none transition-all duration-300 text-slate-800 placeholder-slate-300 text-sm"
+                   placeholder="••••••••" />
+          </div>
           
-          <div class="text-red-500 text-sm mt-2 space-y-1">
-            <p *ngIf="password.hasError('required') && password.touched">● كلمة السر مطلوبة</p>
-            <p *ngIf="password.hasError('minlength') && password.touched">● أقل طول هو 6 حروف</p>
-            <p *ngIf="password.errors?.['pattern'] && password.touched">● يجب احتواء كلمة السر على حرف كبير ورقم</p>
+          <div class="text-red-500 text-xs mt-1 space-y-1 transition-all duration-300">
+            @if(password.hasError('required') && password.touched){ 
+              <p class="flex items-center gap-1.5 animate-fadeIn"><span>●</span> حقل كلمة السر لا يمكن تبييضه فارغاً</p> 
+            }
+            @if(password.hasError('minlength') && password.touched){ 
+              <p class="flex items-center gap-1.5 animate-fadeIn"><span>●</span> يجب أن تتكون كلمة السر من 6 خانات كحد أدنى</p> 
+            }
+            @if(password.errors?.['pattern'] && password.touched){ 
+              <p class="flex items-center gap-1.5 animate-fadeIn"><span>●</span> الرمز السري يتطلب حرفاً كبيراً ورقماً واحداً على الأقل</p> 
+            }
           </div>
         </div>
 
-        <button 
-          [disabled]="form.invalid" 
-          type="submit"
-          class="w-full py-4 bg-emerald-700 text-white rounded-xl font-bold text-lg shadow-lg shadow-emerald-200 hover:bg-emerald-800 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-        >
-          دخول للمنصة
-        </button>
+        <div class="flex flex-col gap-4 pt-4">
+          <button [disabled]="form.invalid" type="submit"
+                  class="w-full bg-emerald-700 text-white py-4 rounded-2xl font-bold text-base shadow-xl shadow-emerald-700/10 hover:bg-emerald-800 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-200 disabled:opacity-40 disabled:transform-none disabled:pointer-events-none flex items-center justify-center gap-2 cursor-pointer">
+            <span>دخول للمنصة</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+          </button>
+        </div>
 
-        <p class="text-center text-slate-500 pt-4">
-          ليس لديك حساب؟
-          <a routerLink="/register" class="text-amber-600 font-bold hover:text-amber-700 transition-colors mr-1">
-            إنشاء حساب جديد
-          </a>
-        </p>
+        <div class="pt-6 mt-4 border-t border-slate-100 text-center">
+          <p class="text-slate-500 text-sm">
+            ليس لديك حساب حالي؟
+            <a routerLink="/register" class="text-amber-700 font-bold hover:text-amber-800 mr-1.5 inline-block hover:scale-[1.02] transition-transform duration-200">
+              إنشاء حساب جديد
+            </a>
+          </p>
+        </div>
       </form>
+
     </div>
   </section>
 </div>

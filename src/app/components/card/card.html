@@ -1,48 +1,78 @@
-<section class="min-h-screen flex items-center justify-center font-['Cairo'] bg-[#020408] relative overflow-hidden" animate.enter="animate-enter">
+<section class="min-h-screen flex items-center justify-center font-['Cairo'] bg-slate-50 relative overflow-hidden" animate.enter="animate-enter">
   
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-900/10 via-transparent to-transparent pointer-events-none"></div>
+  <!-- خلفية ناعمة بإضاءة دائرية خفيفة جداً -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-50/50 via-transparent to-transparent pointer-events-none"></div>
 
-  <div class="relative z-10 w-full max-w-2xl px-6" animate.enter="ayahSection">
+  <div class="relative z-10 w-full max-w-2xl px-4 md:px-6" animate.enter="ayahSection">
     
-    <div class="bg-[#080c16]/60 backdrop-blur-xl border border-emerald-900/20 rounded-[3rem] p-8 md:p-16 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.8)] text-center relative overflow-hidden">
+    <!-- الكارد الرئيسي بخلفية بيضاء وتأثير زجاجي خفيف مع ظل ناعم -->
+    <div class="bg-white/80 backdrop-blur-md border border-slate-100 rounded-[2.5rem] p-6 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.04)] text-center relative overflow-hidden">
       
-      <div class="flex justify-center mb-10 opacity-40">
-        <div class="h-px w-12 bg-gradient-to-r from-transparent to-amber-500"></div>
-        <i class="fa-solid fa-star-and-crescent mx-4 text-amber-500 text-xs"></i>
-        <div class="h-px w-12 bg-gradient-to-l from-transparent to-amber-500"></div>
+      <!-- أيقونة علوية معبرة (مصحف وزخرفة رمادية لامعة) -->
+      <div class="flex flex-col items-center justify-center mb-6 gap-2">
+        <i class="text-green-500 fa-solid fa-book-quran text-slate-300 text-3xl animate-pulse"></i>
+        <div class="flex justify-center items-center opacity-30 w-full">
+          <div class="h-[1px] w-12 bg-gradient-to-r from-transparent to-slate-400"></div>
+          <i class="text-green-500 fa-solid fa-star-and-crescent mx-3 text-slate-400 text-xs"></i>
+          <div class="h-[1px] w-12 bg-gradient-to-l from-transparent to-slate-400"></div>
+        </div>
       </div>
 
       @if(ayah().data) {
-        <p class="text-emerald-500/60 font-['Amiri'] text-xl mb-6 tracking-wide">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+        <!-- البسملة بنص رمادي صغير ولامع -->
+        <p class="text-slate-400 font-['Amiri'] text-base md:text-lg mb-4 tracking-wide font-medium drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)]">
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </p>
 
-        <h1 class="text-4xl md:text-6xl font-['Amiri'] leading-[4.5rem] md:leading-[5.5rem] text-stone-100 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] mb-8" style="direction: rtl;">
+        <!-- نص الآية: رمادي داكن، لامع، بحجم متناسق ومريح للعين -->
+        <h1 class="text-2xl md:text-4xl font-['Amiri'] leading-relaxed md:leading-[3.5rem] text-slate-600 font-semibold mb-6 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]" style="direction: rtl;">
           {{ayah().data.text}}
         </h1>
 
-        <p class="text-emerald-500/40 font-['Amiri'] text-lg mb-10 italic">صَدَقَ اللهُ الْعَظِيمُ</p>
+        <!-- صدق الله العظيم -->
+        <p class="text-slate-400/80 font-['Amiri'] text-sm md:text-base mb-8 italic">
+          صَدَقَ اللهُ الْعَظِيمُ
+        </p>
 
-        <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-emerald-950/30 border border-emerald-900/30 text-stone-400 text-sm mb-12">
-          <i class="fa-solid fa-book-open text-xs text-amber-600/50"></i>
-          <span>{{ayah().data.surah.name}}</span>
-          <span class="w-1 h-1 bg-emerald-900 rounded-full"></span>
+        <!-- بيانات السورة والآية مع أيقونة المصحف -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-slate-400 text-xs md:text-sm mb-10 shadow-sm">
+          <i class="text-green-500 fa-solid fa-book-open text-xs text-amber-500/60"></i>
+          <span class="font-medium">{{ayah().data.surah.name}}</span>
+          <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
           <span>آية رقم: {{ayah().data.number}}</span>
         </div>
       }
 
+      <!-- زر التفاعل مع تأثير التحميل -->
       <div class="flex justify-center">
+        <!-- 
+          ملاحظة: يمكنك ربط خاصية الـ disabled وحالة التحميل بمتغير في الـ Component لديك (مثلاً: isLoading)
+          لقد أضفت هنا الهيكل الجاهز ليعمل مباشرة مع التأثير الجمالي والتحميل.
+        -->
         <button (click)="routTo()"
-                class="group relative overflow-hidden bg-emerald-600 hover:bg-emerald-500 text-white px-12 py-4 rounded-2xl font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_10px_20px_rgba(5,150,105,0.2)]">
-          <span class="relative z-10 flex items-center gap-3">
-             تَمَّتِ الْقِرَاءَةُ
-            <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                [disabled]="loading()"
+                class="group relative overflow-hidden bg-slate-800 hover:bg-slate-700 disabled:bg-slate-400 text-white px-8 md:px-10 py-3 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_4px_12px_rgba(0,0,0,0.1)] disabled:pointer-events-none">
+          
+          <span class="relative z-10 flex items-center justify-center gap-2">
+            <!-- أيقونة التحميل الدوارة تظهر فقط عند التحميل -->
+            @if (loading()) {
+              <i class="text-green-500 fa-solid fa-spinner animate-spin"></i>
+              جاري الانتقال...
+            } @else {
+              تَمَّتِ الْقِرَاءَةُ
+              <i class="text-green-500 fa-solid fa-circle-check text-emerald-400 transition-transform group-hover:scale-110"></i>
+            }
           </span>
-          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+          
+          <!-- تأثير لمعان يمر على الزر عند مرور الماوس -->
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
         </button>
       </div>
 
     </div>
 
-    <p class="text-center mt-8 text-stone-500 text-xs font-medium tracking-widest uppercase">
+    <!-- نص توضيحي سفلي صغير جداً باللون الرمادي الفاتح اللامع -->
+    <p class="text-center mt-6 text-slate-400 text-[10px] md:text-xs font-medium tracking-wider leading-relaxed">
       انقر على الزر أعلاه للانتقال إلى وِرد الحفظ اليومي
     </p>
   </div>

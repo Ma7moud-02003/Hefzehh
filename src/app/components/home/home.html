@@ -1,169 +1,326 @@
-<section class="min-h-screen font-['Cairo'] bg-[#020408] text-stone-200 selection:bg-emerald-500/30 selection:text-emerald-200" animate.enter="animate-enter">
-    
-    <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-emerald-900/10 blur-[120px] rounded-full"></div>
-        <div class="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-amber-900/10 blur-[120px] rounded-full"></div>
-    </div>
 
-    <nav class="w-full fixed top-0 inset-x-0 z-[1000] backdrop-blur-md bg-[#050810]/60 border-b border-emerald-900/20 px-6 md:px-16 py-4 flex justify-between items-center shadow-xl">
-        <div class="flex items-center gap-4 group">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-900 to-emerald-700 border border-emerald-500/30 flex items-center justify-center text-emerald-100 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                <i class="fa-solid fa-user text-sm"></i>
-            </div>
-            <div class="hidden md:block">
-                <p class="text-[10px] text-emerald-500/60 font-bold uppercase tracking-widest leading-none mb-1">المستخدم الحالي</p>
-                <span class="font-bold text-sm text-stone-300">{{userData().userName}}</span>
-            </div>
+<div dir="rtl" class="min-h-screen bg-white text-[#1C2620] font-['Cairo'] selection:bg-[#0F766E]/15 selection:text-[#0F766E]" animate.enter="animate-enter">
+
+  <!-- ============================= NAV ============================= -->
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#0F766E]/10">
+    <div class="max-w-6xl mx-auto px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <svg viewBox="0 0 40 40" class="w-8 h-8 md:w-9 md:h-9 text-[#0F766E]" aria-hidden="true">
+          <path fill="currentColor" d="M20 2 L24 14 L36 14 L26 21 L30 33 L20 26 L10 33 L14 21 L4 14 L16 14 Z" opacity="0.92"/>
+        </svg>
+        <span class="font-['Amiri'] font-bold text-lg md:text-xl text-[#1C2620]">مِنصة حفظه</span>
+      </div>
+
+      <div class="flex items-center gap-4 md:gap-6">
+        <div class="hidden sm:flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-[#0F766E] text-white flex items-center justify-center text-xs font-bold">
+            {{ (userData().userName || '؟').charAt(0) }}
+          </div>
+          <span class="text-sm font-semibold text-[#3A453F]">{{ userData().userName }}</span>
         </div>
-
-        <div class="flex flex-col items-center">
-            <h1 class="text-2xl md:text-3xl font-['Amiri'] font-bold bg-gradient-to-b from-amber-200 to-amber-500 bg-clip-text text-transparent drop-shadow-sm">مِنصة المرتل</h1>
-            <div class="h-[1px] w-16 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
-        </div>
-
-        <button (click)="logout()" 
-                class="flex items-center gap-2 text-stone-400 hover:text-red-400 transition-all px-4 py-2 rounded-xl hover:bg-red-950/20 border border-transparent hover:border-red-900/30 group">
-            <span class="text-xs font-bold hidden md:block">تسجيل الخروج</span>
-            <i class="fa-solid fa-power-off text-lg group-hover:rotate-12 transition-transform"></i>
+        <button
+          (click)="logout()"
+          class="flex items-center gap-2 text-sm font-semibold text-[#8A8078] hover:text-[#B3261E] transition-colors px-3 py-2 rounded-lg hover:bg-[#B3261E]/5"
+          aria-label="تسجيل الخروج">
+          <span class="hidden md:inline">تسجيل الخروج</span>
+          <i class="fa-solid fa-power-off"></i>
         </button>
-    </nav>
-
-    <div class="max-w-5xl mx-auto pt-32 pb-28 px-4 relative z-10">
-        
-        <div class="relative rounded-[3rem] bg-[#080c16]/80 border border-emerald-900/20 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.8)] backdrop-blur-sm overflow-hidden">
-            
-            <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
-
-            <div class="p-8 md:p-14 text-center border-b border-emerald-900/10 bg-gradient-to-b from-emerald-950/10 to-transparent">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/20 text-emerald-400 text-[11px] font-bold uppercase tracking-widest mb-6 animate-pulse">
-                    <i class="fa-solid fa-circle text-[6px]"></i>
-                    وِرد الحفظ اليومي
-                </div>
-                
-                <h2 class="text-6xl md:text-8xl font-['Amiri'] font-bold mb-6 text-stone-100 drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
-                    {{surah().name}}
-                </h2>
-                
-                <div class="flex justify-center items-center gap-8 text-stone-500 text-sm font-medium">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-list-ol text-emerald-600/50"></i>
-                        <span>الآيات: {{surah().numberOfAyahs}}</span>
-                    </div>
-                    <div class="w-1.5 h-1.5 bg-amber-600/40 rounded-full"></div>
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-mosque text-emerald-600/50"></i>
-                        <span>{{surah().revelationType === 'Meccan' ? 'مكية' : 'مدنية'}}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-5 min-h-[500px] flex flex-wrap justify-center content-start gap-x-6 gap-y-4  md:leading-[2rem] text-center" 
-                 style="direction: rtl;">
-                
-                @for (aya of dailyAyat(); track aya; let i=$index) {
-                    <div class="relative group cursor-pointer" (click)="playSingleAyah(aya.number,i)">
-                        <p class="text-2xl md:text-4xl font-['Amiri'] transition-all duration-500   rounded-3xl"
-                           [ngClass]="{
-                             'text-amber-400 scale-110 font-bold bg-amber-500/5 shadow-[0_0_40px_rgba(245,158,11,0.1)]': i == currentReadingAyahIndex(),
-                             'text-stone-300 hover:text-white': i != currentReadingAyahIndex(),
-                             'blur-xl opacity-5 scale-95': hideAyat() && i != currentReadingAyahIndex()
-                           }">
-                            {{ aya.text }}
-                            <span class="inline-flex items-center justify-center mr-4 translate-y-3">
-                                <svg class="w-14 h-14 md:w-16 md:h-16 text-emerald-800/40 group-hover:text-emerald-500 transition-colors duration-300" viewBox="0 0 100 100">
-                                    <path fill="currentColor" d="M50 10 L65 35 L90 50 L65 65 L50 90 L35 65 L10 50 L35 35 Z" />
-                                </svg>
-                                <span class="absolute text-[13px] md:text-[15px] font-sans font-bold text-emerald-200/40 group-hover:text-emerald-100 transition-colors">{{ aya.numberInSurah }}</span>
-                            </span>
-                        </p>
-                    </div>
-                }
-            </div>
-
-            <div class="hidden md:flex items-center justify-between p-10 bg-[#04060b]/60 border-t border-emerald-900/10 backdrop-blur-md">
-                <div class="flex gap-4">
-                    <button (click)="completed()" class="group px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-bold shadow-[0_10px_20px_rgba(5,150,105,0.2)] transition-all hover:-translate-y-1 active:scale-95 flex items-center gap-3">
-                        إتمام الحفظ 
-                        <i class="fa-solid fa-check-double group-hover:scale-125 transition-transform"></i>
-                    </button>
-                    <button (click)="getShowTafseer()" class="px-7 py-4 bg-transparent border border-emerald-800/40 hover:border-emerald-500 hover:bg-emerald-500/5 text-emerald-400 rounded-2xl font-bold transition-all">
-                        تفسير الآيات
-                    </button>
-                </div>
-
-                <div class="flex items-center gap-12">
-                    <button (click)="getPreviousDay()" [disabled]="state().inPrevious" class="w-12 h-12 rounded-full border border-emerald-900/30 text-stone-500 hover:text-amber-500 hover:border-amber-500/50 disabled:opacity-5 transition-all">
-                        <i class="fa-solid fa-chevron-right text-xl"></i>
-                    </button>
-                    
-                    <button (click)="play() ? stopPlaying() : playAllAyahs()" 
-                            [ngClass]="play() ? 'bg-red-600 shadow-red-900/40' : 'bg-amber-500 shadow-amber-900/40'"
-                            class="w-24 h-24 rounded-full flex items-center justify-center text-[#050810] shadow-2xl transition-all hover:scale-110 active:scale-95 group relative">
-                        <div class="absolute inset-0 rounded-full bg-inherit animate-ping opacity-20" *ngIf="play()"></div>
-                        <i [class]="play() ? 'fa-solid fa-stop text-3xl' : 'fa-solid fa-play text-3xl translate-x-1'"></i>
-                    </button>
-
-                    <button (click)="getDailyAyat()" [disabled]="state().inCurrent" class="w-12 h-12 rounded-full border border-emerald-900/30 text-stone-500 hover:text-amber-500 hover:border-amber-500/50 disabled:opacity-5 transition-all">
-                        <i class="fa-solid fa-chevron-left text-xl"></i>
-                    </button>
-                </div>
-
-                <button (click)="hiddenAyat()" 
-                        [ngClass]="hideAyat() ? 'bg-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.3)] text-[#050810]' : 'text-stone-500 hover:text-amber-500 border-emerald-900/30 hover:border-amber-500/30'"
-                        class="w-16 h-16 rounded-2xl border flex items-center justify-center transition-all group">
-                    <i [ngClass]="hideAyat() ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'" class="text-2xl group-hover:scale-110 transition-transform"></i>
-                </button>
-            </div>
-        </div>
-
-        @if(showTafseer()) {
-            <div animate.enter="animate-enter" id="tafseer" class="mt-16 space-y-8 animate-in fade-in slide-in-from-bottom-10 duration-700">
-                <div class="flex items-center gap-6">
-                    <div class="h-px flex-1 bg-gradient-to-r from-transparent to-emerald-900/30"></div>
-                    <h3 class="text-3xl font-['Amiri'] font-bold text-amber-500">بيان المعاني والتفسير</h3>
-                    <div class="h-px flex-1 bg-gradient-to-l from-transparent to-emerald-900/30"></div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    @for(taya of dailyTafseer(); track taya; let i=$index) {
-                        <div class="p-10 rounded-[2.5rem] bg-[#080c16]/60 border border-emerald-900/20 hover:border-emerald-500/40 transition-all duration-300 group hover:-translate-y-1">
-                            <div class="flex items-center justify-between mb-6">
-                                <span class="text-[10px] font-black text-emerald-500 bg-emerald-500/10 px-4 py-1 rounded-full border border-emerald-500/20 uppercase tracking-tighter">آية {{i+1}}</span>
-                                <div class="w-2 h-2 rounded-full bg-emerald-900 group-hover:bg-emerald-500 transition-colors"></div>
-                            </div>
-                            <p class="text-stone-300 leading-relaxed text-xl font-['Cairo'] group-hover:text-stone-100 transition-colors">{{taya.text}}</p>
-                        </div>
-                    }
-                </div>
-            </div>
-        }
+      </div>
     </div>
+  </nav>
 
-    <div class="md:hidden fixed bottom-8 inset-x-6 z-[1000]">
-        <div class="bg-[#0a0f1d]/90 backdrop-blur-2xl rounded-[2.5rem] p-4 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex justify-around items-center border border-emerald-900/30 ring-1 ring-white/5">
-            <button (click)="getPreviousDay()" class="w-10 h-10 flex items-center justify-center text-stone-500"><i class="fa-solid fa-chevron-right text-lg"></i></button>
-            <button (click)="showTafseer.set(!showTafseer())" class="w-10 h-10 flex items-center justify-center text-stone-500"><i class="fa-solid fa-book-open"></i></button>
-            
-            <button (click)="play() ? stopPlaying() : playAllAyahs()" 
-                    [ngClass]="play() ? 'bg-red-600' : 'bg-amber-600'"
-                    class="w-16 h-16 rounded-full text-[#050810] shadow-lg -translate-y-6 border-4 border-[#020408] flex items-center justify-center transition-all active:scale-90">
-                <i [class]="play() ? 'fa-solid fa-stop text-xl' : 'fa-solid fa-play text-xl translate-x-0.5'"></i>
+  <!-- ======================= HERO / TODAY'S PORTION ======================= -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-[#F8FAF9] to-white">
+    <!-- ambient tint, not decoration-heavy -->
+    <div class="absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(ellipse_at_top,rgba(15,118,110,0.06),transparent_70%)] pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-5 md:px-10 pt-12 md:pt-20 pb-10 relative">
+      <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+
+        <!-- Text side -->
+        <div>
+          <span class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0F766E] bg-[#0F766E]/8 px-3.5 py-1.5 rounded-full">
+            <i class="fa-solid fa-circle text-[5px]"></i>
+            وِرد الحفظ اليومي
+          </span>
+
+          <h1 class="mt-6 font-['Amiri'] font-bold text-4xl sm:text-5xl md:text-6xl leading-tight text-[#1C2620]">
+            {{ surah().name || 'جاري تحميل السورة…' }}
+          </h1>
+
+          <p class="mt-4 text-[#5B6B65] text-base md:text-lg max-w-md leading-relaxed">
+            @if (dailyRangeLabel()) {
+              حصتك اليوم {{ dailyRangeLabel() }} — استمع، رتّل، ثم أتمّ حفظك.
+            } @else {
+              استمر في رحلتك اليومية لحفظ القرآن الكريم، آية بعد آية.
+            }
+          </p>
+
+          <div class="mt-6 flex items-center gap-6 text-sm text-[#5B6B65]">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-list-ol text-[#0F766E]/60"></i>
+              {{ surah().numberOfAyahs || '—' }} آية
+            </span>
+            <span class="w-1 h-1 rounded-full bg-[#C89B3C]/60"></span>
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-mosque text-[#0F766E]/60"></i>
+              {{ surah().revelationType === 'Meccan' ? 'مكية' : 'مدنية' }}
+            </span>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <button
+              (click)="completed()"
+              class="inline-flex items-center gap-2 px-6 py-3.5 bg-[#0F766E] hover:bg-[#0B5A54] text-white font-bold rounded-2xl shadow-[0_10px_24px_-8px_rgba(15,118,110,0.5)] transition-all hover:-translate-y-0.5 active:translate-y-0">
+              إتمام الحفظ
+              <i class="fa-solid fa-check-double text-sm"></i>
             </button>
-
-            <button (click)="hiddenAyat()" class="w-10 h-10 flex items-center justify-center text-stone-500"><i class="fa-solid fa-eye-slash"></i></button>
-            <button (click)="completed()" class="w-10 h-10 flex items-center justify-center text-emerald-500"><i class="fa-solid fa-check-double text-lg"></i></button>
+            <button
+              (click)="getShowTafseer()"
+              class="px-6 py-3.5 border-2 border-[#0F766E]/20 hover:border-[#0F766E] text-[#0F766E] font-bold rounded-2xl transition-colors">
+              {{ showTafseer() ? 'إخفاء التفسير' : 'تفسير الآيات' }}
+            </button>
+          </div>
         </div>
-    </div>
-</section>
 
-@if(showAlert()) {
-    <div animate.enter="animate-enter"
-        class="fixed top-24 left-1/2 -translate-x-1/2 z-[9999] p-1 shadow-2xl rounded-2xl bg-gradient-to-r from-emerald-600 to-amber-600 animate-in fade-in slide-in-from-top-5 duration-500">
-        <div class="bg-[#050810] px-6 py-4 rounded-[calc(1rem-1px)] flex items-center gap-4">
-            <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                <i class="fa-solid fa-bell text-amber-500 text-sm"></i>
+        <!-- Illuminated progress card — the signature element -->
+        <div class="relative mx-auto w-full max-w-sm">
+          <div class="relative rounded-[2rem] bg-white border border-[#0F766E]/12 shadow-[0_24px_60px_-20px_rgba(15,118,110,0.25)] p-8 md:p-10">
+            <!-- gold corner ornaments (mushaf illumination motif) -->
+            <svg class="absolute top-3 right-3 w-8 h-8 text-[#C89B3C]/50" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M2 2 L2 12 M2 2 L12 2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <circle cx="2" cy="2" r="2.5" fill="currentColor"/>
+            </svg>
+            <svg class="absolute bottom-3 left-3 w-8 h-8 text-[#C89B3C]/50 rotate-180" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M2 2 L2 12 M2 2 L12 2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <circle cx="2" cy="2" r="2.5" fill="currentColor"/>
+            </svg>
+
+            <p class="text-xs font-bold tracking-widest uppercase text-[#8A8078] text-center">تقدّمك في السورة</p>
+
+            <!-- Progress ring -->
+            <div class="relative w-40 h-40 mx-auto mt-6">
+              <svg viewBox="0 0 100 100" class="w-full h-full -rotate-90">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#F0EEE9" stroke-width="8"/>
+                <circle
+                  cx="50" cy="50" r="42" fill="none" stroke="#0F766E" stroke-width="8"
+                  stroke-linecap="round"
+                  [attr.stroke-dasharray]="264"
+                  [attr.stroke-dashoffset]="264 - (264 * surahProgressPercent() / 100)"
+                  class="transition-[stroke-dashoffset] duration-700 ease-out"/>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span class="font-['Tajawal'] font-bold text-3xl text-[#1C2620]">{{ surahProgressPercent() }}٪</span>
+                <span class="text-[11px] text-[#8A8078] font-semibold">مكتمل</span>
+              </div>
             </div>
-            <p class="font-bold text-stone-100 text-sm tracking-wide">{{alertMessage()}}</p>
+
+            <div class="mt-6 flex justify-center gap-8 text-center">
+              <div>
+                <p class="font-['Tajawal'] font-bold text-xl text-[#0F766E]">{{ UserData.currentAyah || '—' }}</p>
+                <p class="text-[11px] text-[#8A8078] font-semibold mt-0.5">الآية الحالية</p>
+              </div>
+              <div class="w-px bg-[#0F766E]/10"></div>
+              <div>
+                <p class="font-['Tajawal'] font-bold text-xl text-[#C89B3C]">{{ UserData.dailyAyahs || '—' }}</p>
+                <p class="text-[11px] text-[#8A8078] font-semibold mt-0.5">آيات يوميًا</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </section>
+
+  <!-- ======================= READING CARD ======================= -->
+  <section class="max-w-5xl mx-auto px-5 md:px-10 -mt-2 md:mt-4 pb-6 relative z-10">
+    <div class="rounded-[2rem] bg-white border border-[#0F766E]/10 shadow-[0_20px_50px_-24px_rgba(28,38,32,0.15)] overflow-hidden">
+
+      <!-- verses -->
+     <!-- verses -->
+<div class="p-6 md:p-10 min-h-[280px]">
+  @if (hasDailyAyat()) {
+    <div class="flex flex-wrap justify-center gap-x-4 gap-y-5 text-center leading-[2.1rem] md:leading-[2.6rem]">
+      @for (aya of dailyAyat(); track aya.number; let i = $index) {
+        <button
+          type="button"
+          (click)="playSingleAyah(aya.number, i)"
+          class="group relative font-['Amiri'] text-lg md:text-2xl transition-all duration-300 rounded-2xl px-1 select-none"
+          [ngClass]="{
+            'text-[#C89B3C] font-bold scale-105': i === currentReadingAyahIndex(),
+            'text-[#4B5563] hover:text-[#0F766E]': i !== currentReadingAyahIndex(),
+            'blur-md opacity-10': hideAyat() && i !== currentReadingAyahIndex()
+          }"
+          [attr.aria-pressed]="i === currentReadingAyahIndex()"
+          [attr.aria-label]="'تشغيل الآية ' + aya.numberInSurah">
+          {{ aya.text }}
+          <span class="inline-flex items-center justify-center relative align-middle top-[-0.15em] mr-1.5">
+            <svg class="w-6 h-6 md:w-8 md:h-8 text-[#0F766E]/15 group-hover:text-[#0F766E]/40 transition-colors" viewBox="0 0 100 100" aria-hidden="true">
+              <path fill="currentColor" d="M50 10 L65 35 L90 50 L65 65 L50 90 L35 65 L10 50 L35 35 Z"/>
+            </svg>
+            <span class="absolute text-[9px] md:text-[11px] font-['Tajawal'] font-bold text-[#0F766E]">{{ aya.numberInSurah }}</span>
+          </span>
+        </button>
+      }
+    </div>
+  } @else {
+    <div class="h-full flex flex-col items-center justify-center text-center py-16 text-[#8A8078]">
+      <i class="fa-solid fa-book-quran text-3xl mb-3 opacity-40"></i>
+      <p class="font-semibold">جاري تحضير حصتك اليومية…</p>
+    </div>
+  }
+</div>
+      <!-- playback controls -->
+      <div class="flex items-center justify-between gap-4 px-6 md:px-10 py-6 bg-[#F8FAF9] border-t border-[#0F766E]/8">
+        <button
+          (click)="getPreviousDay()"
+          [disabled]="state().inPrevious"
+          class="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0F766E]/15 text-[#5B6B65] hover:text-[#C89B3C] hover:border-[#C89B3C]/50 disabled:opacity-30 disabled:hover:text-[#5B6B65] disabled:hover:border-[#0F766E]/15 transition-all"
+          aria-label="اليوم السابق">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <button
+          (click)="play() ? stopPlaying() : playAllAyahs()"
+          [ngClass]="play() ? 'bg-[#B3261E] shadow-[#B3261E]/30' : 'bg-[#0F766E] shadow-[#0F766E]/30'"
+          class="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-white shadow-xl transition-transform hover:scale-105 active:scale-95 relative"
+          [attr.aria-label]="play() ? 'إيقاف التلاوة' : 'تشغيل التلاوة'">
+          @if (play()) {
+            <span class="absolute inset-0 rounded-full bg-inherit animate-ping opacity-20"></span>
+          }
+          <i class="fa-solid text-xl md:text-2xl" [ngClass]="play() ? 'fa-stop' : 'fa-play translate-x-0.5'"></i>
+        </button>
+
+        <div class="flex items-center gap-2 md:gap-3">
+          <button
+            (click)="hiddenAyat()"
+            [ngClass]="hideAyat() ? 'bg-[#C89B3C] text-white border-[#C89B3C]' : 'text-[#5B6B65] border-[#0F766E]/15 hover:border-[#C89B3C]/50 hover:text-[#C89B3C]'"
+            class="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 flex items-center justify-center transition-all"
+            [attr.aria-label]="hideAyat() ? 'إظهار الآيات' : 'إخفاء الآيات'">
+            <i class="fa-solid" [ngClass]="hideAyat() ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+
+          <button
+            (click)="getDailyAyat()"
+            [disabled]="state().inCurrent"
+            class="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0F766E]/15 text-[#5B6B65] hover:text-[#C89B3C] hover:border-[#C89B3C]/50 disabled:opacity-30 disabled:hover:text-[#5B6B65] disabled:hover:border-[#0F766E]/15 transition-all"
+            aria-label="اليوم الحالي">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= TAFSEER ======================= -->
+  @if (showTafseer()) {
+    <section id="tafseer-section"  class="max-w-5xl mx-auto px-5 md:px-10 py-14" animate.enter="animate-enter">
+      <div class="flex items-center gap-5 mb-8">
+        <div class="h-px flex-1 bg-[#0F766E]/12"></div>
+        <h3 class="font-['Amiri'] font-bold text-2xl md:text-3xl text-[#1C2620] whitespace-nowrap">بيان المعاني والتفسير</h3>
+        <div class="h-px flex-1 bg-[#0F766E]/12"></div>
+      </div>
+
+      @if (dailyTafseer().length > 0) {
+        <div class="grid sm:grid-cols-2 gap-5">
+          @for (taya of dailyTafseer(); track $index; let i = $index) {
+            <div class="p-7 md:p-8 rounded-3xl bg-[#F8FAF9] border border-[#0F766E]/8 hover:border-[#0F766E]/25 hover:bg-white hover:shadow-[0_16px_36px_-20px_rgba(28,38,32,0.2)] transition-all duration-300">
+              <span class="inline-block text-[10px] font-bold text-[#0F766E] bg-[#0F766E]/8 px-3 py-1 rounded-full mb-4">
+                آية {{ i + 1 }}
+              </span>
+              <p class="text-[#3A453F] leading-loose text-lg">{{ taya.text }}</p>
+            </div>
+          }
+        </div>
+      } @else {
+        <p class="text-center text-[#8A8078] py-10">لا يتوفر تفسير لهذه الحصة حاليًا.</p>
+      }
+    </section>
+  }
+
+  <!-- ======================= WHY MEMORIZE (static, informational) ======================= -->
+  <section class="bg-[#F8FAF9] border-y border-[#0F766E]/8 py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-5 md:px-10">
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <h2 class="font-['Amiri'] font-bold text-3xl md:text-4xl text-[#1C2620]">لماذا الحفظ بانتظام؟</h2>
+        <p class="mt-3 text-[#5B6B65]">حصة يومية صغيرة، ومتابعة مستمرة، تصنع فرقًا كبيرًا مع الوقت.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-8 rounded-3xl border border-[#0F766E]/8 hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgba(28,38,32,0.2)] transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-[#0F766E]/10 flex items-center justify-center text-[#0F766E] mb-5">
+            <i class="fa-solid fa-calendar-check text-lg"></i>
+          </div>
+          <h3 class="font-bold text-lg text-[#1C2620] mb-2">خطة يومية مرنة</h3>
+          <p class="text-[#5B6B65] text-sm leading-relaxed">عدد آيات يناسب وقتك، يتقدّم معك آيةً آية دون إرهاق.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-3xl border border-[#0F766E]/8 hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgba(28,38,32,0.2)] transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-[#C89B3C]/10 flex items-center justify-center text-[#C89B3C] mb-5">
+            <i class="fa-solid fa-microphone-lines text-lg"></i>
+          </div>
+          <h3 class="font-bold text-lg text-[#1C2620] mb-2">تلاوة بصوت مختارك</h3>
+          <p class="text-[#5B6B65] text-sm leading-relaxed">استمع بصوت الشيخ الذي اخترته، آية بآية أو دفعة واحدة.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-3xl border border-[#0F766E]/8 hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgba(28,38,32,0.2)] transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-[#0F766E]/10 flex items-center justify-center text-[#0F766E] mb-5">
+            <i class="fa-solid fa-book-open text-lg"></i>
+          </div>
+          <h3 class="font-bold text-lg text-[#1C2620] mb-2">تفسير ميسّر</h3>
+          <p class="text-[#5B6B65] text-sm leading-relaxed">افهم معنى ما تحفظ ليكون الحفظ أرسخ في القلب.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="py-10 border-t border-[#0F766E]/8">
+    <div class="max-w-6xl mx-auto px-5 md:px-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <svg viewBox="0 0 40 40" class="w-6 h-6 text-[#0F766E]/60" aria-hidden="true">
+          <path fill="currentColor" d="M20 2 L24 14 L36 14 L26 21 L30 33 L20 26 L10 33 L14 21 L4 14 L16 14 Z"/>
+        </svg>
+        <span class="font-['Amiri'] font-bold text-[#5B6B65]">مِنصة حفظه</span>
+      </div>
+      <p class="text-xs text-[#8A8078]">جعله الله في ميزان حسناتنا وحسناتكم — {{ 2026 }}</p>
+    </div>
+  </footer>
+
+  <!-- ======================= MOBILE ACTION BAR ======================= -->
+  <div class="lg:hidden fixed bottom-5 inset-x-4 z-50">
+    <div class="bg-white/95 backdrop-blur-xl rounded-[1.75rem] p-3 shadow-[0_20px_45px_-12px_rgba(28,38,32,0.35)] border border-[#0F766E]/10 flex justify-around items-center">
+      <button (click)="getPreviousDay()" class="w-10 h-10 flex items-center justify-center text-[#5B6B65]" aria-label="اليوم السابق">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <button (click)="getShowTafseer()" class="w-10 h-10 flex items-center justify-center text-[#5B6B65]" aria-label="التفسير">
+        <i class="fa-solid fa-book-open"></i>
+      </button>
+      <button
+        (click)="play() ? stopPlaying() : playAllAyahs()"
+        [ngClass]="play() ? 'bg-[#B3261E]' : 'bg-[#0F766E]'"
+        class="w-14 h-14 rounded-full text-white shadow-lg -translate-y-5 border-4 border-white flex items-center justify-center transition-all active:scale-90"
+        [attr.aria-label]="play() ? 'إيقاف' : 'تشغيل'">
+        <i class="fa-solid" [ngClass]="play() ? 'fa-stop' : 'fa-play translate-x-0.5'"></i>
+      </button>
+      <button (click)="hiddenAyat()" class="w-10 h-10 flex items-center justify-center text-[#5B6B65]" aria-label="إخفاء الآيات">
+        <i class="fa-solid fa-eye-slash"></i>
+      </button>
+      <button (click)="completed()" class="w-10 h-10 flex items-center justify-center text-[#0F766E]" aria-label="إتمام الحفظ">
+        <i class="fa-solid fa-check-double"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= TOAST ======================= -->
+@if (showAlert()) {
+  <div animate.enter="animate-enter" class="fixed top-20 md:top-24 left-1/2 -translate-x-1/2 z-[9999] max-w-[90vw]">
+    <div class="flex items-center gap-3 bg-white border border-[#C89B3C]/30 shadow-[0_16px_40px_-12px_rgba(28,38,32,0.3)] px-5 py-3.5 rounded-2xl">
+      <div class="w-8 h-8 rounded-full bg-[#C89B3C]/12 flex items-center justify-center shrink-0">
+        <i class="fa-solid fa-bell text-[#C89B3C] text-sm"></i>
+      </div>
+      <p class="font-bold text-[#1C2620] text-sm leading-snug">{{ alertMessage() }}</p>
+    </div>
+  </div>
 }

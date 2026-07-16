@@ -18,12 +18,12 @@ export class UserPlane {
   suar = signal(surahs);
 
   plane = signal<PlaneInterface>({
-    sheikhId: "ar.alafasy",        // الشيخ المختار (audio edition)
-    surahNumber: 2,               // رقم السورة
-    startAyah: 5,                 // هيبدأ من أنهي آية
-    dailyAyahs: 5,                // عدد الآيات يوميًا
-    currentAyah: 1,               // آخر آية وصلها
-    completed: false              // خلص السورة ولا لسه
+    sheikhId: "ar.alafasy",        
+    surahNumber: 2,              
+    startAyah: 5,                
+    dailyAyahs: 5,              
+    currentAyah: 1,               
+    completed: false             
   })
 
   step = signal<number>(0);
@@ -47,19 +47,26 @@ export class UserPlane {
 
   // Angular fire section
   showLoading = signal<boolean>(false);
-  setUserPlane() {
-    this.showLoading.set(true);
-    this._plane.savePlane(this.plane()).then((res) => {
-      alert('تم حفظ الخطه  نسأل الله لك التثبيت ❤️');
-      this.rout.navigate(['/home']);
+  showAlert = signal(false);
+setUserPlane() {
+  this.showLoading.set(true);
+  this._plane.savePlane(this.plane()).then((res) => {
+    
+    this.showLoading.set(false);
+    console.log('saved' + res);
 
-      this.showLoading.set(false);
-      console.log('saved' + res);
+    // إظهار التنبيه المخصص الذي صنعناه في الـ HTML
+    this.showAlert.set(true);
 
-    }).catch((err) => {
-      console.log(err);
+  }).catch((err) => {
+    this.showLoading.set(false);
+    console.log(err);
+  })
+}
 
-    })
-  }
-
+// 3. دالة للانتقال بعد إغلاق التنبيه
+closeAlertAndNavigate() {
+  this.showAlert.set(false);
+  this.rout.navigate(['/home']);
+}
 }
