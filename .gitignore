@@ -46,3 +46,8 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+# Generated CSS from SCSS sources (keep public assets untouched)
+/src/styles.css
+/src/**/*.css.map
+/src/app/**/*.css

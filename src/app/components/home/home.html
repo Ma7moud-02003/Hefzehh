@@ -172,13 +172,23 @@
 </div>
       <!-- playback controls -->
       <div class="flex items-center justify-between gap-4 px-6 md:px-10 py-6 bg-[#F8FAF9] border-t border-[#0F766E]/8">
-        <button
-          (click)="getPreviousDay()"
-          [disabled]="state().inPrevious"
-          class="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0F766E]/15 text-[#5B6B65] hover:text-[#C89B3C] hover:border-[#C89B3C]/50 disabled:opacity-30 disabled:hover:text-[#5B6B65] disabled:hover:border-[#0F766E]/15 transition-all"
-          aria-label="اليوم السابق">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
+        <div class="flex items-center gap-2">
+          <button
+            (click)="getPreviousDay()"
+            [disabled]="state().inPrevious"
+            class="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0F766E]/15 text-[#5B6B65] hover:text-[#C89B3C] hover:border-[#C89B3C]/50 disabled:opacity-30 disabled:hover:text-[#5B6B65] disabled:hover:border-[#0F766E]/15 transition-all"
+            aria-label="اليوم السابق">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          @if (!state().inPrevious && !state().inCurrent) {
+            <button
+              (click)="getCurrentDay()"
+              class="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#0F766E]/15 text-[#5B6B65] hover:text-[#0F766E] hover:border-[#0F766E]/50 transition-all"
+              aria-label="العودة إلى حصة اليوم">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+          }
+        </div>
 
         <button
           (click)="play() ? stopPlaying() : playAllAyahs()"
@@ -214,7 +224,7 @@
 
   <!-- ======================= TAFSEER ======================= -->
   @if (showTafseer()) {
-    <section id="tafseer-section"  class="max-w-5xl mx-auto px-5 md:px-10 py-14" animate.enter="animate-enter">
+    <section id="tafseer-section" class="max-w-5xl mx-auto px-5 md:px-10 py-14" animate.enter="animate-enter">
       <div class="flex items-center gap-5 mb-8">
         <div class="h-px flex-1 bg-[#0F766E]/12"></div>
         <h3 class="font-['Amiri'] font-bold text-2xl md:text-3xl text-[#1C2620] whitespace-nowrap">بيان المعاني والتفسير</h3>
@@ -293,6 +303,11 @@
       <button (click)="getPreviousDay()" class="w-10 h-10 flex items-center justify-center text-[#5B6B65]" aria-label="اليوم السابق">
         <i class="fa-solid fa-chevron-right"></i>
       </button>
+      @if (!state().inPrevious && !state().inCurrent) {
+        <button (click)="getCurrentDay()" class="w-10 h-10 flex items-center justify-center text-[#0F766E]" aria-label="العودة إلى حصة اليوم">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+      }
       <button (click)="getShowTafseer()" class="w-10 h-10 flex items-center justify-center text-[#5B6B65]" aria-label="التفسير">
         <i class="fa-solid fa-book-open"></i>
       </button>
