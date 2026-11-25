@@ -1,9 +1,48 @@
 /* Keyboard focus visibility — kept separate from hover states on purpose */
 :host button:focus-visible,
 :host a:focus-visible {
-  outline: 2px solid #0f766e;
+  outline: 2px solid var(--brand);
   outline-offset: 3px;
   border-radius: 0.75rem;
+}
+
+:host {
+  display: block;
+}
+
+:host > div[dir='rtl'] {
+  min-height: 100svh;
+  padding-bottom: 1.5rem;
+  background: linear-gradient(180deg, #f7faf8 0%, #ffffff 42%, #f7faf8 100%);
+  color: var(--ink);
+}
+
+:host nav {
+  border-color: var(--line);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+:host section.max-w-5xl > div {
+  border-color: var(--line);
+  box-shadow: var(--card-shadow);
+}
+
+:host section#tafseer-section .grid > div {
+  border-color: var(--line);
+}
+
+:host button {
+  touch-action: manipulation;
+}
+
+@media (max-width: 640px) {
+  :host > div[dir='rtl'] {
+    padding-bottom: 7rem;
+  }
+
+  :host [class*='fixed bottom-5 inset-x-4'] {
+    bottom: calc(1.25rem + env(safe-area-inset-bottom)) !important;
+  }
 }
 
 /* Respect reduced-motion preferences */
